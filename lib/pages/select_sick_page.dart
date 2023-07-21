@@ -1,3 +1,4 @@
+import 'package:fastmedic/pages/response_page.dart';
 import 'package:flutter/material.dart';
 
 class SelectSickPage extends StatelessWidget{
@@ -7,16 +8,16 @@ class SelectSickPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.redAccent,
+        appBar: AppBar(
+          backgroundColor: Colors.redAccent,
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              Text("main"),//TODO
+            ],
           ),
-          body: Center(
-            child: Column(
-              children: [
-                Text("main"),
-              ],
-            ),
-          )
+        ),
       ),
     );
   }
