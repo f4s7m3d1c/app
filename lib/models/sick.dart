@@ -2,5 +2,7 @@
 
 enum Sick{
   cough, // 기침
+  stomachache, //.복통
+  dyspnea, //호흡곤란
 }
 
