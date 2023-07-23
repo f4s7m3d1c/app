@@ -18,6 +18,12 @@ Future<void> main() async {
       sendToast("Error: ${ex.code}");
       hasError = true;
     }
+  ).timeout(
+    const Duration(seconds: 10),
+    onTimeout: () {
+      sendToast("네트워크를 확인해 주세요");
+      hasError = true;
+    },
   );
   if(hasError){
     if(Platform.isIOS){
@@ -39,9 +45,9 @@ class MyApp extends StatelessWidget{
       providers: [
         ChangeNotifierProvider<SelectSick>(create: (context) => SelectSick(),),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         title: "FastMedic",
-        home: const SelectSickPage(),
+        home: SelectSickPage(),
       ),
     );
   }
