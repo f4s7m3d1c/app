@@ -25,6 +25,7 @@ Future<void> main() async {
       hasError = true;
     },
   );
+  await Geolocator.requestPermission();
   if(hasError){
     if(Platform.isIOS){
       exit(0);
