@@ -1,5 +1,5 @@
 import 'package:fastmedic/elements/icon_text_button.dart';
-import 'package:fastmedic/pages/map_dialog.dart';
+import 'package:fastmedic/pages/dialog/map_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ResponsePage extends StatelessWidget{
