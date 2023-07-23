@@ -24,10 +24,15 @@ class IconTextButton extends StatelessWidget {
       width: width,
       child: ElevatedButton(
         style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(7),
+            )
+          ),
           padding: MaterialStateProperty.all<EdgeInsets>(
               const EdgeInsets.symmetric(horizontal: 5)
           ),
-          backgroundColor: color == null ? null : MaterialStateProperty.all<Color>(color!)
+          backgroundColor: color == null ? null : MaterialStateProperty.all<Color>(color!),
         ),
         onPressed: onPressed,
         child: Row(
