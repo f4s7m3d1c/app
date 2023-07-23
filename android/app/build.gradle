@@ -75,4 +75,5 @@ android{
     defaultConfig {
         minSdkVersion 21
     }
+    compileSdkVersion 33
 }
