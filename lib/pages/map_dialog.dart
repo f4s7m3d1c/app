@@ -44,7 +44,7 @@ class _MapDialogState extends State<MapDialog> {
                 options: NaverMapViewOptions(
                   initialCameraPosition: NCameraPosition(
                     target: NLatLng(position.x, position.y),
-                    zoom: 10,
+                    zoom: 13 ,
                   ),
                 ),
                 onMapReady: (controller) {
