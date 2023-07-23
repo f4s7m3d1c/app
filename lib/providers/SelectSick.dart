@@ -8,7 +8,7 @@ class _SelectSickState extends Equatable{
   const _SelectSickState({required this.selects});
 
   factory _SelectSickState.initial() {
-    return _SelectSickState(selects: []);
+    return const _SelectSickState(selects: []);
   }
 
   @override
