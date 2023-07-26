@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:fastmedic/pages/response_page.dart';
 import 'package:fastmedic/pages/select_sick_page.dart';
-import 'package:fastmedic/providers/SelectSick.dart';
+import 'package:fastmedic/providers/select_sick.dart';
 import 'package:fastmedic/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
