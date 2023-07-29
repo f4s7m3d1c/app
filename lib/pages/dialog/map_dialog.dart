@@ -1,3 +1,4 @@
+import 'package:fastmedic/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
@@ -16,52 +17,74 @@ class _MapDialogState extends State<MapDialog> {
       final Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high
       );
+      final latLng =  NLatLng(position.latitude, position.longitude);
       controller.updateCamera(NCameraUpdate.fromCameraPosition(
           NCameraPosition(
-        target: NLatLng(position.latitude, position.longitude),
-        zoom: 15,
+        target: latLng,
+        zoom: 14,
       ))..setAnimation(
         animation: NCameraAnimation.none,
         duration: Duration.zero,
       ));
+      final marker = NMarker(
+        id: "user_location",
+        position: latLng,
+        icon: NOverlayImage.fromAssetImage(Assets.Location),
+      );
+      controller.addOverlayAll({
+        NCircleOverlay(
+            id: "user_location_near",
+            center: latLng,
+            radius: 1200,
+            color: Colors.lightBlueAccent.withAlpha(20),
+            outlineColor: Colors.blue,
+            outlineWidth: 1
+        ),
+        marker,
+      });
+      final markerInfo = NInfoWindow.onMarker(
+          id: marker.info.id,
+          text: "현위치",
+          offsetY: -20,
+          alpha: 0.9
+      );
+      marker.setOnTapListener((overlay) => marker.openInfoWindow(markerInfo));
     }catch(e){}
   }
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: Column(
-        children: [
-          Expanded(
-            child: NaverMap(
+      child: Container(
+        padding: EdgeInsets.all(5),
+        child: Stack(
+          children: [
+            NaverMap(
               options: const NaverMapViewOptions(
-                  contentPadding: EdgeInsets.all(5),
-                  initialCameraPosition: NCameraPosition(
-                    target: NLatLng(37.574187, 126.976882,),
-                    zoom: 15,
-                  ),
-                  minZoom: 13,
+                  minZoom: 12,
                   activeLayerGroups: [
                     NLayerGroup.building,
                     NLayerGroup.traffic
                   ]
               ),
               onMapReady: (controller) {
-                print("맵 로딩됨!");
                 updateToCurrent(controller);
               },
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton(
-                child: const Text("닫기"),
+            Positioned(
+              top: 3,
+              right: 3,
+              child: IconButton(
+                icon: Icon(
+                  Icons.close_sharp,
+                  size: 35,
+                  weight: 10,
+                ),
                 onPressed: () => Navigator.pop(context),
-              )
-            ],
-          )
-        ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:fastmedic/database/log_database.dart';
+import 'package:fastmedic/pages/response_page.dart';
 import 'package:fastmedic/pages/select_sick_page.dart';
 import 'package:fastmedic/providers/select_sick.dart';
 import 'package:fastmedic/utils/toast.dart';
@@ -8,10 +10,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite/sqflite.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var hasError = false;
+  await Geolocator.requestPermission();
+  Database db = await openDatabase("search_log.db");
+  LogDB.init(db);
   await NaverMapSdk.instance.initialize(
     clientId: "YOUR_ID",
     onAuthFailed: (ex) {
@@ -25,16 +31,17 @@ Future<void> main() async {
       hasError = true;
     },
   );
-  await Geolocator.requestPermission();
   if(hasError){
     if(Platform.isIOS){
+      db.close();
       exit(0);
     }else{
       SystemNavigator.pop();
     }
-  }else{
+  }else {
     runApp(const MyApp());
   }
+  db.close();
 }
 
 class MyApp extends StatelessWidget{

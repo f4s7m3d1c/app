@@ -10,7 +10,7 @@ class ResponsePage extends StatelessWidget{
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Colors.white,
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
