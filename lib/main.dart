@@ -16,7 +16,20 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var hasError = false;
   await Geolocator.requestPermission();
-  Database db = await openDatabase("search_log.db");
+  Database db = await openDatabase(
+    "search_log.db",
+    onOpen: (db) async {
+      await db.execute(
+          "CREATE TABLE IF NOT EXISTS `sick_search_db` ("
+              "`id` INTEGER PRIMARY KEY AUTOINCREMENT," // id 자동 지정
+              "`date` TEXT" // 날짜 시간 저장 (YYYY.MM.DD.HH.mm)
+              "`sicks` TEXT," // 선택한 증상 저장
+              "`desc` TEXT," // 세부 사항 저장
+              "`result` TEXT" //결과값 저장
+          ");"
+      );
+    },
+  );
   LogDB.init(db);
   await NaverMapSdk.instance.initialize(
     clientId: "YOUR_ID",

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fastmedic/utils/date.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LogDB {
@@ -12,13 +13,6 @@ class LogDB {
   }
 
   factory LogDB.init(Database db) {
-    final completer = Completer();
-    db.execute("").then(
-      (value) => completer.complete(),
-    );
-    while(!completer.isCompleted){
-      // waiting
-    }
     return LogDB(db: db);
   }
 
@@ -27,6 +21,14 @@ class LogDB {
   }
 
   Future<void> addLog(String korKeyword, String desc, String result) async {
-
+    db.insert(
+      "sick_search_db",
+      {
+        "date": dateFormat(DateTime.now()),
+        "sicks": korKeyword,
+        "desc": desc,
+        "result": result
+      },
+    );
   }
 }
