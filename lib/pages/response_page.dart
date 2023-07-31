@@ -10,12 +10,24 @@ class ResponsePage extends StatelessWidget{
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xFFF3F3F3),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          leading: const Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Image(
+              image: AssetImage("assets/mini.png"),
+            ),
+          ),
+          elevation: 20,
+          shadowColor: Colors.grey.shade200,
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 10,),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(10),

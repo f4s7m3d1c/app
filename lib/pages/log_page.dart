@@ -1,8 +1,7 @@
-import 'package:fastmedic/pages/response_page.dart';
 import 'package:flutter/material.dart';
 
-class SelectSickPage extends StatelessWidget{
-  const SelectSickPage({super.key});
+class LogPage extends StatelessWidget {
+  const LogPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +21,7 @@ class SelectSickPage extends StatelessWidget{
           elevation: 25,
           shadowColor: Colors.grey.shade200,
         ),
-        body: Center(
-          child: Column(
-            children: [
-              Text("main"),//TODO
-            ],
-          ),
-        ),
+        body: Text("Log Page"),
       ),
     );
   }

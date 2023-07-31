@@ -7,13 +7,15 @@ import 'package:fastmedic/providers/select_sick.dart';
 import 'package:fastmedic/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: binding);
   var hasError = false;
   await Geolocator.requestPermission();
   Database db = await openDatabase(
@@ -44,6 +46,7 @@ Future<void> main() async {
       hasError = true;
     },
   );
+  FlutterNativeSplash.remove();
   if(hasError){
     if(Platform.isIOS){
       db.close();
@@ -67,6 +70,7 @@ class MyApp extends StatelessWidget{
         ChangeNotifierProvider<SelectSick>(create: (context) => SelectSick(),),
       ],
       child: const MaterialApp(
+        themeMode: ThemeMode.light,
         title: "FastMedic",
         home: SelectSickPage(),
       ),
