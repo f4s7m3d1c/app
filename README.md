@@ -3,14 +3,16 @@
 학교 공모전
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. flutter pub get으로 의존성 모듈 다운
+```shell
+$ flutter pub get
+```
+2. .env 파일 루트에 생성
+```.env
+NAVER_MAP_KEY=YOUR_KEY
+```
+3. 환경 변수 관련 빌드
+```shell
+$ flutter pub add --dev envied_generator
+$ flutter pub add --dev build_runner
+```

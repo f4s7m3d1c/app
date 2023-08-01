@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fastmedic/database/log_database.dart';
+import 'package:fastmedic/env/env.dart';
 import 'package:fastmedic/pages/response_page.dart';
 import 'package:fastmedic/pages/select_sick_page.dart';
 import 'package:fastmedic/providers/select_sick.dart';
@@ -34,7 +35,7 @@ Future<void> main() async {
   );
   LogDB.init(db);
   await NaverMapSdk.instance.initialize(
-    clientId: "YOUR_ID",
+    clientId: Env.naver_map_key,
     onAuthFailed: (ex) {
       sendToast("Error: ${ex.code}");
       hasError = true;
