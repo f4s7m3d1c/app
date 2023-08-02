@@ -1,10 +1,19 @@
+import 'package:fastmedic/elements/chat_box.dart';
 import 'package:fastmedic/elements/icon_text_button.dart';
 import 'package:fastmedic/pages/basic_app_bar.dart';
 import 'package:fastmedic/pages/dialog/map_dialog.dart';
+import 'package:fastmedic/providers/select_sick.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ResponsePage extends StatelessWidget{
   const ResponsePage({super.key});
+
+  Future<String> callChatGPT(SelectSick selectSick) async {
+    await Future.delayed(Duration(seconds: 1));
+    selectSick.clear();
+    return "ChatGPT 답변";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +27,53 @@ class ResponsePage extends StatelessWidget{
             const SizedBox(height: 10,),
             Expanded(
               child: Container(
-                padding: const EdgeInsets.all(10),
-                child: const SingleChildScrollView(
-                  child: Text(
-                    "Chat GPT 답변",
-                    style: TextStyle(
-                      fontSize: 18
-                    ),
+                padding: const EdgeInsets.all(20),
+                child: Card(
+                  color: Colors.grey.shade200,
+                  child: FutureBuilder(
+                    future: callChatGPT(context.read<SelectSick>()),
+                    builder: (context, snapshot) {
+                      if(!snapshot.hasData) {
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "AI 응답 대기 중...",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                ),
+                              ),
+                              SizedBox(height: 5,),
+                              SizedBox(
+                                height: 70,
+                                width: 70,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 7,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      return SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                          child: Row(
+                            children: [
+                              //TODO: ai icon
+                              ChatBox(
+                                text: "Chat GPT 답변\n",
+                                textStyle: TextStyle(
+                                    fontSize: 18
+                                ),
+                                color: Colors.lightGreen.shade100,
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
