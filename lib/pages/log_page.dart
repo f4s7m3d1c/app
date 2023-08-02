@@ -1,4 +1,31 @@
+import 'package:fastmedic/database/log_database.dart';
+import 'package:fastmedic/models/log.dart';
+import 'package:fastmedic/pages/basic_app_bar.dart';
 import 'package:flutter/material.dart';
+
+class LogCard extends StatelessWidget{
+  final Log log;
+
+  const LogCard({required this.log});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                log.date
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
 
 class LogPage extends StatelessWidget {
   const LogPage({super.key});
@@ -7,21 +34,33 @@ class LogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color(0xFFF3F3F3),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+        appBar: BasicAppBar,
+        body: Center(
+          child: FutureBuilder(
+            future: LogDB.instance.getLogs(),
+            builder: (context, snapshot) {
+              if(!snapshot.hasData) {
+                return const Column(
+                  children: [
+                    Text(
+                      "데이터를 불러오는 중...",
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
+                    ),
+                    CircularProgressIndicator()
+                  ],
+                );
+              } else {
+                List<Log> logs = snapshot.data!;
+                return ListView.builder(
+                  itemCount: logs.length,
+                  itemBuilder: (context, index) => LogCard(log: logs[index]),
+                );
+              }
+            },
           ),
-          leading: const Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: Image(
-              image: AssetImage("assets/mini.png"),
-            ),
-          ),
-          elevation: 25,
-          shadowColor: Colors.grey.shade200,
         ),
-        body: Text("Log Page"),
       ),
     );
   }
