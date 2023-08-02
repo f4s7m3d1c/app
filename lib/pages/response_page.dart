@@ -3,6 +3,7 @@ import 'package:fastmedic/elements/icon_text_button.dart';
 import 'package:fastmedic/pages/basic_app_bar.dart';
 import 'package:fastmedic/pages/dialog/map_dialog.dart';
 import 'package:fastmedic/providers/select_sick.dart';
+import 'package:fastmedic/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,9 +28,10 @@ class ResponsePage extends StatelessWidget{
             const SizedBox(height: 10,),
             Expanded(
               child: Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(10),
                 child: Card(
                   color: Colors.grey.shade200,
+                  margin: EdgeInsets.all(1),
                   child: FutureBuilder(
                     future: callChatGPT(context.read<SelectSick>()),
                     builder: (context, snapshot) {
@@ -57,20 +59,24 @@ class ResponsePage extends StatelessWidget{
                         );
                       }
                       return SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                          child: Row(
-                            children: [
-                              //TODO: ai icon
-                              ChatBox(
-                                text: "Chat GPT 답변\n",
-                                textStyle: TextStyle(
-                                    fontSize: 18
-                                ),
-                                color: Colors.lightGreen.shade100,
-                              )
-                            ],
-                          ),
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: Image(
+                                image: AssetImage(Assets.ai_icon),
+                              ),
+                            ),
+                            ChatBox(
+                              text: "Chat GPT 답변\n",
+                              textStyle: TextStyle(
+                                  fontSize: 18
+                              ),
+                              color: Colors.lightGreen.shade100,
+                            )
+                          ],
                         ),
                       );
                     },

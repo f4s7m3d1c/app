@@ -1,3 +1,4 @@
+import 'package:fastmedic/utils/assets.dart';
 import 'package:flutter/material.dart';
 
 final AppBar BasicAppBar = AppBar(
@@ -8,9 +9,9 @@ final AppBar BasicAppBar = AppBar(
   leading: const Padding(
     padding: EdgeInsets.only(left: 10),
     child: Image(
-      image: AssetImage("assets/mini.png"),
+      image: AssetImage(Assets.mini_icon),
     ),
   ),
-  elevation: 25,
+  elevation: 10,
   shadowColor: Colors.grey.shade200,
 );

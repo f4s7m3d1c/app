@@ -59,39 +59,42 @@ class ChatBox extends StatelessWidget {
 
     return Align(
       alignment: isSender ? Alignment.topRight : Alignment.topLeft,
-      child: CustomPaint(
-        painter: ChatBubblePainter(
-            color: color,
-            alignment: isSender ? Alignment.topRight : Alignment.topLeft,
-            tail: tail),
-        child: Container(
-          margin: isSender
-              ? stateTick
-              ? EdgeInsets.fromLTRB(7, 7, 14, 7)
-              : EdgeInsets.fromLTRB(7, 7, 17, 7)
-              : EdgeInsets.fromLTRB(17, 7, 7, 7),
-          child: Stack(
-            children: <Widget>[
-              Padding(
-                padding: stateTick
-                    ? EdgeInsets.only(right: 20)
-                    : EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                child: Text(
-                  text,
-                  style: textStyle,
-                  textAlign: TextAlign.left,
+      child: Padding(
+        padding: EdgeInsets.only(top: 30),
+        child: CustomPaint(
+          painter: ChatBubblePainter(
+              color: color,
+              alignment: isSender ? Alignment.topRight : Alignment.topLeft,
+              tail: tail),
+          child: Container(
+            margin: isSender
+                ? stateTick
+                ? EdgeInsets.fromLTRB(7, 7, 14, 7)
+                : EdgeInsets.fromLTRB(7, 7, 17, 7)
+                : EdgeInsets.fromLTRB(17, 7, 7, 7),
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: stateTick
+                      ? EdgeInsets.only(right: 20)
+                      : EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                  child: Text(
+                    text,
+                    style: textStyle,
+                    textAlign: TextAlign.left,
+                  ),
                 ),
-              ),
-              stateIcon != null && stateTick
-                  ? Positioned(
-                bottom: 0,
-                right: 0,
-                child: stateIcon,
-              )
-                  : SizedBox(
-                width: 1,
-              ),
-            ],
+                stateIcon != null && stateTick
+                    ? Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: stateIcon,
+                )
+                    : SizedBox(
+                  width: 1,
+                ),
+              ],
+            ),
           ),
         ),
       ),

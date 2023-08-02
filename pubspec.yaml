@@ -73,6 +73,7 @@ flutter:
     - assets/map/location.png
     - assets/splash.png
     - assets/mini.png
+    - assets/ai_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
