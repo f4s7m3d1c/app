@@ -1,10 +1,14 @@
 import 'dart:async';
 
+import 'package:fastmedic/models/log.dart';
 import 'package:fastmedic/utils/date.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LogDB {
+
   static LogDB? _instance;
+
+  static LogDB get instance => _instance!;
 
   final Database db;
 
@@ -16,12 +20,8 @@ class LogDB {
     return LogDB(db: db);
   }
 
-  factory LogDB.getInstance() {
-    return LogDB._instance!;
-  }
-
   Future<void> addLog(String korKeyword, String desc, String result) async {
-    db.insert(
+    await db.insert(
       "sick_search_db",
       {
         "date": dateFormat(DateTime.now()),
@@ -29,6 +29,29 @@ class LogDB {
         "desc": desc,
         "result": result
       },
+    );
+  }
+
+  Future<List<Log>> getLogs() async {
+    List<Log> logs = [];
+    List<Map> rows = await db.rawQuery("SELECT * From `sick_search_db`;");
+    rows.forEach((map) {
+      logs.add(Log(
+        id: map["id"],
+        date: map["date"],
+        keywords: map["sicks"],
+        description: map["desc"],
+        result: map["result"],
+      ));
+    });
+    return logs;
+  }
+
+  Future<void> removeLog(int id) async{
+    await db.delete(
+      "sick_search_db",
+      where: "id = ?",
+      whereArgs: [id],
     );
   }
 }
