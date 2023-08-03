@@ -39,8 +39,9 @@ class LogPage extends StatelessWidget {
           child: FutureBuilder(
             future: LogDB.instance.getLogs(),
             builder: (context, snapshot) {
-              if(!snapshot.hasData) {
+              if(snapshot.data == null) {
                 return const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "데이터를 불러오는 중...",

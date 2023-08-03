@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:fastmedic/database/log_database.dart';
 import 'package:fastmedic/env/env.dart';
+import 'package:fastmedic/pages/log_page.dart';
 import 'package:fastmedic/pages/response_page.dart';
 import 'package:fastmedic/pages/select_sick_page.dart';
+import 'package:path/path.dart';
 import 'package:fastmedic/providers/select_sick.dart';
 import 'package:fastmedic/utils/toast.dart';
 import 'package:flutter/material.dart';
@@ -19,18 +21,21 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: binding);
   var hasError = false;
   await Geolocator.requestPermission();
+  String dbPath = await getDatabasesPath();
+  print(dbPath);
   Database db = await openDatabase(
-    "search_log.db",
-    onOpen: (db) async {
-      await db.execute(
-          "CREATE TABLE IF NOT EXISTS `sick_search_db` ("
-              "`id` INTEGER PRIMARY KEY AUTOINCREMENT," // id 자동 지정
-              "`date` TEXT" // 날짜 시간 저장 (YYYY.MM.DD.HH.mm)
-              "`sicks` TEXT," // 선택한 증상 저장
-              "`desc` TEXT," // 세부 사항 저장
-              "`result` TEXT" //결과값 저장
-          ");"
-      );
+    join(dbPath, "search_log.db"),
+    version: 1,
+    onCreate: (db, version) async {
+      await db.execute('''
+          CREATE TABLE IF NOT EXISTS `sick_search_db` (
+              `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+              `date` TEXT NOT NULL,
+              `sicks` TEXT NOT NULL,
+              `desc` TEXT NOT NULL,
+              `result` TEXT NOT NULL
+          );
+      ''');
     },
   );
   LogDB.init(db);
@@ -58,7 +63,6 @@ Future<void> main() async {
   }else {
     runApp(const MyApp());
   }
-  db.close();
 }
 
 class MyApp extends StatelessWidget{
