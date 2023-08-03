@@ -29,7 +29,7 @@ Future<void> main() async {
     onCreate: (db, version) async {
       await db.execute('''
           CREATE TABLE IF NOT EXISTS `sick_search_db` (
-              `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+              `id` TEXT PRIMARY KEY,
               `date` TEXT NOT NULL,
               `sicks` TEXT NOT NULL,
               `desc` TEXT NOT NULL,

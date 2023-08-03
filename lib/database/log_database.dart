@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:fastmedic/models/log.dart';
-import 'package:fastmedic/utils/date.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LogDB {
@@ -20,14 +19,15 @@ class LogDB {
     return LogDB(db: db);
   }
 
-  Future<void> addLog(String korKeyword, String desc, String result) async {
+  Future<void> addLog(Log log) async {
     await db.insert(
       "sick_search_db",
       {
-        "date": dateFormat(DateTime.now()),
-        "sicks": korKeyword,
-        "desc": desc,
-        "result": result
+        "id": log.id,
+        "date": log.date,
+        "sicks": log.keywords,
+        "desc": log.description,
+        "result": log.result
       },
     );
   }

@@ -12,22 +12,10 @@ class _SelectSickState extends Equatable{
   }
 
   @override
-  List<Object?> get props => [selects];
+  List<Object> get props => [selects];
 
   @override
-  bool? get stringify => true;
-
-  String get selects2str {
-    String str = "";
-    int count = selects.length;
-    for(int i = 0; i < count; i++){
-      str += selects[i].toKorean();
-      if(i == count - 1) {
-        str += ", ";
-      }
-    }
-    return str;
-  }
+  bool get stringify => true;
 
   _SelectSickState copyWith({
     List<Sick>? selects,

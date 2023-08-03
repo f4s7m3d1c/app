@@ -1,5 +1,11 @@
+import 'package:fastmedic/extensions/sick2str.dart';
+import 'package:uuid/uuid.dart';
+
+import '../utils/date.dart';
+import 'Sick.dart';
+
 class Log {
-  final int id;
+  final String id;
   final String date;
   final String keywords;
   final String description;
@@ -12,4 +18,24 @@ class Log {
     required this.description,
     required this.result,
   });
+
+  factory Log.create({
+    required List<Sick> keywords,
+    required String description,
+    required String result,
+  }) {
+    DateTime dateTime = DateTime.now();
+    final String id = Uuid().v5(
+      Uuid.NAMESPACE_NIL,
+      "${dateTime.millisecondsSinceEpoch}-${keywords}",
+    );
+    final String date = dateFormat(dateTime);
+    return Log(
+      id: id,
+      date: date,
+      keywords: keywords.parse(),
+      description: description,
+      result: result,
+    );
+  }
 }
