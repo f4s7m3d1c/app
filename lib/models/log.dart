@@ -25,9 +25,9 @@ class Log {
     required String result,
   }) {
     DateTime dateTime = DateTime.now();
-    final String id = Uuid().v5(
+    final String id = const Uuid().v5(
       Uuid.NAMESPACE_NIL,
-      "${dateTime.millisecondsSinceEpoch}-${keywords}",
+      "${dateTime.millisecondsSinceEpoch}-$keywords",
     );
     final String date = dateFormat(dateTime);
     return Log(

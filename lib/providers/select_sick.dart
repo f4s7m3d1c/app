@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'package:fastmedic/models/Sick.dart';
 import 'package:flutter/material.dart';
 
-class _SelectSickState extends Equatable{
+class SelectSickState extends Equatable{
   final List<Sick> selects;
 
-  const _SelectSickState({required this.selects});
+  const SelectSickState({required this.selects});
 
-  factory _SelectSickState.initial() {
-    return const _SelectSickState(selects: []);
+  factory SelectSickState.initial() {
+    return const SelectSickState(selects: []);
   }
 
   @override
@@ -17,19 +17,19 @@ class _SelectSickState extends Equatable{
   @override
   bool get stringify => true;
 
-  _SelectSickState copyWith({
+  SelectSickState copyWith({
     List<Sick>? selects,
   }) {
-    return _SelectSickState(
+    return SelectSickState(
       selects: selects ?? this.selects,
     );
   }
 }
 
 class SelectSick with ChangeNotifier{
-  _SelectSickState _state = _SelectSickState.initial();
+  SelectSickState _state = SelectSickState.initial();
 
-  _SelectSickState get state => _state;
+  SelectSickState get state => _state;
 
   void addSelect(Sick sick) {
     final List<Sick> newSelects = [..._state.selects, sick];
@@ -44,7 +44,7 @@ class SelectSick with ChangeNotifier{
   }
 
   void clear() {
-    _state = _SelectSickState.initial();
+    _state = SelectSickState.initial();
     notifyListeners();
   }
 }

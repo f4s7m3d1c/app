@@ -47,7 +47,7 @@ class LogDB {
     return logs;
   }
 
-  Future<void> removeLog(int id) async{
+  Future<void> removeLog(String id) async{
     await db.delete(
       "sick_search_db",
       where: "id = ?",

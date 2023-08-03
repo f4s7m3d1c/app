@@ -5,6 +5,7 @@ import 'package:fastmedic/env/env.dart';
 import 'package:fastmedic/pages/log_page.dart';
 import 'package:fastmedic/pages/response_page.dart';
 import 'package:fastmedic/pages/select_sick_page.dart';
+import 'package:fastmedic/providers/log_list.dart';
 import 'package:path/path.dart';
 import 'package:fastmedic/providers/select_sick.dart';
 import 'package:fastmedic/utils/toast.dart';
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget{
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<SelectSick>(create: (context) => SelectSick(),),
+        ChangeNotifierProvider<LogList>(create: (context) => LogList(),),
       ],
       child: const MaterialApp(
         themeMode: ThemeMode.light,
