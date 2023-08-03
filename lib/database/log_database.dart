@@ -35,7 +35,7 @@ class LogDB {
   Future<List<Log>> getLogs() async {
     List<Log> logs = [];
     List<Map> rows = await db.rawQuery("SELECT * From `sick_search_db`;");
-    rows.forEach((map) {
+    for (var map in rows) {
       logs.add(Log(
         id: map["id"],
         date: map["date"],
@@ -43,7 +43,7 @@ class LogDB {
         description: map["desc"],
         result: map["result"],
       ));
-    });
+    }
     return logs;
   }
 

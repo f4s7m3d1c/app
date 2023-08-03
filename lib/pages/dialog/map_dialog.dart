@@ -29,7 +29,7 @@ class _MapDialogState extends State<MapDialog> {
       final marker = NMarker(
         id: "user_location",
         position: latLng,
-        icon: NOverlayImage.fromAssetImage(Assets.Location),
+        icon: const NOverlayImage.fromAssetImage(Assets.Location),
       );
       controller.addOverlayAll({
         NCircleOverlay(
@@ -49,14 +49,16 @@ class _MapDialogState extends State<MapDialog> {
           alpha: 0.9
       );
       marker.setOnTapListener((overlay) => marker.openInfoWindow(markerInfo));
-    }catch(e){}
+    }catch(e){
+      //NOPE
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Stack(
           children: [
             NaverMap(
@@ -75,7 +77,7 @@ class _MapDialogState extends State<MapDialog> {
               top: 3,
               right: 3,
               child: IconButton(
-                icon: Icon(
+                icon:  const Icon(
                   Icons.close_sharp,
                   size: 35,
                   weight: 10,

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class LogCard extends StatelessWidget{
   final Log log;
 
-  const LogCard({required this.log});
+  const LogCard({super.key, required this.log});
 
   @override
   Widget build(BuildContext context) {

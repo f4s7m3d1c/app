@@ -11,7 +11,7 @@ class ResponsePage extends StatelessWidget{
   const ResponsePage({super.key});
 
   Future<String> callChatGPT(SelectSick selectSick) async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     selectSick.clear();
     return "ChatGPT 답변";
   }
@@ -31,12 +31,12 @@ class ResponsePage extends StatelessWidget{
                 padding: const EdgeInsets.all(10),
                 child: Card(
                   color: Colors.grey.shade200,
-                  margin: EdgeInsets.all(1),
+                  margin: const EdgeInsets.all(1),
                   child: FutureBuilder(
                     future: callChatGPT(context.read<SelectSick>()),
                     builder: (context, snapshot) {
                       if(!snapshot.hasData) {
-                        return Center(
+                        return const Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -59,10 +59,10 @@ class ResponsePage extends StatelessWidget{
                         );
                       }
                       return SingleChildScrollView(
-                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Row(
                           children: [
-                            SizedBox(
+                           const  SizedBox(
                               height: 50,
                               width: 50,
                               child: Image(
@@ -71,7 +71,7 @@ class ResponsePage extends StatelessWidget{
                             ),
                             ChatBox(
                               text: "Chat GPT 답변\n",
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   fontSize: 18
                               ),
                               color: Colors.lightGreen.shade100,
@@ -85,7 +85,7 @@ class ResponsePage extends StatelessWidget{
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20,),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -152,6 +152,9 @@ class ResponsePage extends StatelessWidget{
                   ),
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 15,
             )
           ],
         ),
