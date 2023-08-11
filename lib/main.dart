@@ -23,7 +23,6 @@ Future<void> main() async {
   var hasError = false;
   await Geolocator.requestPermission();
   String dbPath = await getDatabasesPath();
-  print(dbPath);
   Database db = await openDatabase(
     join(dbPath, "search_log.db"),
     version: 1,
