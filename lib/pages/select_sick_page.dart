@@ -14,6 +14,7 @@ class SelectSickPage extends StatelessWidget{
           child: Column(
             children: [
               Text("main"),//TODO
+              Text('ㅁㄴㅇㄹ'),
             ],
           ),
         ),
