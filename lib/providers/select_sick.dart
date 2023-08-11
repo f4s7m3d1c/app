@@ -5,23 +5,30 @@ import 'package:flutter/material.dart';
 class SelectSickState extends Equatable{
   final List<Sick> selects;
 
-  const SelectSickState({required this.selects});
+  final String description;
+
+  const SelectSickState({
+    required this.selects,
+    required this.description
+  });
 
   factory SelectSickState.initial() {
-    return const SelectSickState(selects: []);
+    return const SelectSickState(selects: [], description: "");
   }
 
   @override
-  List<Object> get props => [selects];
+  List<Object> get props => [selects, description];
 
   @override
   bool get stringify => true;
 
   SelectSickState copyWith({
     List<Sick>? selects,
+    String? description,
   }) {
     return SelectSickState(
       selects: selects ?? this.selects,
+      description: description ?? this.description
     );
   }
 }
@@ -40,6 +47,11 @@ class SelectSick with ChangeNotifier{
   void removeSelect(Sick sick) {
     final List<Sick> newSelects = _state.selects..remove(sick);
     _state = _state.copyWith(selects: newSelects);
+    notifyListeners();
+  }
+
+  void setDescription(String desc) {
+    _state = _state.copyWith(description: desc);
     notifyListeners();
   }
 
