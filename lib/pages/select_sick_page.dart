@@ -1,7 +1,7 @@
 import 'package:fastmedic/pages/basic_app_bar.dart';
 import 'package:fastmedic/pages/response_page.dart';
 import 'package:flutter/material.dart';
-import 'package:fastmedic/extensions/SymptomsContainer.dart';
+import 'package:fastmedic/elements/SymptomsContainer.dart';
 
 class SelectSickPage extends StatelessWidget {
   const SelectSickPage({super.key});
