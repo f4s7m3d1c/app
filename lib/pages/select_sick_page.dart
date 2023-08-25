@@ -48,7 +48,8 @@ class SelectSickPage extends StatelessWidget {
             ),
           ),
         ),
-        body: Center(
+        body: Padding(
+          padding: EdgeInsets.all(30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -75,19 +76,6 @@ class SelectSickPage extends StatelessWidget {
                   Symptoms(
                     ConditionName: '충혈',
                     images: 'assets/sick/congestion.jpg',
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Symptoms(
-                    ConditionName: '두통',
-                    images: 'assets/sick/Headache.jpg',
-                  ),
-                  Symptoms(
-                    ConditionName: '두통',
-                    images: 'assets/sick/Headache.jpg',
                   ),
                 ],
               ),
