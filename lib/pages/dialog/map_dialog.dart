@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:fastmedic/utils/assets.dart';
+import 'package:fastmedic/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart';
 
 class MapDialog extends StatefulWidget{
   const MapDialog({super.key});
@@ -12,11 +16,56 @@ class MapDialog extends StatefulWidget{
 
 class _MapDialogState extends State<MapDialog> {
 
+  Future<void> getHospitals(NaverMapController controller, Position position) async {
+    final Response response = await get(Uri.parse("https://nearbyhospitals.foundcake.kr/api/hospital?lat=${position.latitude}&lon=${position.longitude}"));
+    if(response.statusCode != 200) {
+      sendToast("error code is ${response.statusCode}");
+      return;
+    }
+    Map<String, dynamic> data = json.decode(response.body);
+    final List<dynamic> hospitals = data["hospitals"];
+    int id = 0;
+    hospitals.forEach((hospital) {
+      final marker = NMarker(
+        id: "hospitals_$id",
+        position: NLatLng(
+          hospital["latitude"],
+          hospital["longitude"],
+        ),
+      );
+      controller.addOverlay(marker);
+      marker.setOnTapListener((_) {
+        showDialog(
+          context: context,
+          builder: (dialogContext) {
+            return Dialog(
+              child: Column(
+                children: [
+                  // TODO: 병원 정보
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        child: const Text("닫기"),
+                        onPressed: () => Navigator.pop(dialogContext),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            );
+          },
+        );
+      });
+    });
+  }
+
   Future<void> updateToCurrent(NaverMapController controller ) async {
     try{
       final Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high
       );
+      getHospitals(controller, position);
       final latLng =  NLatLng(position.latitude, position.longitude);
       controller.updateCamera(NCameraUpdate.fromCameraPosition(
           NCameraPosition(
@@ -26,8 +75,9 @@ class _MapDialogState extends State<MapDialog> {
         animation: NCameraAnimation.none,
         duration: Duration.zero,
       ));
+      final markerId = "user_location";
       final marker = NMarker(
-        id: "user_location",
+        id: markerId,
         position: latLng,
         icon: const NOverlayImage.fromAssetImage(Assets.Location),
       );
@@ -42,13 +92,11 @@ class _MapDialogState extends State<MapDialog> {
         ),
         marker,
       });
-      final markerInfo = NInfoWindow.onMarker(
-          id: marker.info.id,
-          text: "현위치",
-          offsetY: -20,
-          alpha: 0.9
-      );
-      marker.setOnTapListener((overlay) => marker.openInfoWindow(markerInfo));
+      marker.openInfoWindow(NInfoWindow.onMarker(
+        id: markerId,
+        text: "현위치",
+        alpha: 0.8,
+      ));
     }catch(e){
       //NOPE
     }
