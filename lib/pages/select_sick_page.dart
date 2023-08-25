@@ -50,49 +50,72 @@ class SelectSickPage extends StatelessWidget {
         ),
         body: Padding(
           padding: EdgeInsets.all(30),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Symptoms(
-                    ConditionName: '두통',
-                    images: 'assets/sick/Headache.jpg',
-                  ),
-                  Symptoms(
-                    ConditionName: '호흡',
-                    images: 'assets/sick/breath.jpg',
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Symptoms(
-                    ConditionName: '물집',
-                    images: 'assets/sick/blister.jpg',
-                  ),
-                  Symptoms(
-                    ConditionName: '충혈',
-                    images: 'assets/sick/congestion.jpg',
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Symptoms(
-                    ConditionName: '두통',
-                    images: 'assets/sick/Headache.jpg',
-                  ),
-                  Symptoms(
-                    ConditionName: '두통',
-                    images: 'assets/sick/Headache.jpg',
-                  ),
-                ],
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Symptoms(
+                      ConditionName: '두통',
+                      images: 'assets/sick/Headache.jpg',
+                    ),
+                    Symptoms(
+                      ConditionName: '호흡',
+                      images: 'assets/sick/breath.jpg',
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Symptoms(
+                      ConditionName: '물집',
+                      images: 'assets/sick/blister.jpg',
+                    ),
+                    Symptoms(
+                      ConditionName: '충혈',
+                      images: 'assets/sick/congestion.jpg',
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Symptoms(
+                      ConditionName: '화상',
+                      images: 'assets/sick/Burns.jpg',
+                    ),
+                    Symptoms(
+                      ConditionName: '두통',
+                      images: 'assets/sick/Headache.jpg',
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Symptoms(
+                      ConditionName: '두통',
+                      images: 'assets/sick/Headache.jpg',
+                    ),
+                    Symptoms(
+                      ConditionName: '두통',
+                      images: 'assets/sick/Headache.jpg',
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

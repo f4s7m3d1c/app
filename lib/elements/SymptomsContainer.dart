@@ -14,7 +14,7 @@ class Symptoms extends StatelessWidget{
         Container(
           clipBehavior: Clip.hardEdge,
           width: 150,
-          height: 170,
+          height: 150,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -58,6 +58,5 @@ class Symptoms extends StatelessWidget{
         ),
       ],
     );
-
   }
 }
