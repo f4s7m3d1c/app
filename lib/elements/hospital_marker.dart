@@ -14,7 +14,7 @@ class HospitalMarker extends NMarker {
     id: id,
     position: position,
     alpha: hospital.hasER ? 1 : 0.8,
-    size: hospital.hasER ? Size(100, 100) : Size(90, 90),
+    size: hospital.hasER ? const Size(100, 100) : const Size(90, 90),
     icon: NOverlayImage.fromAssetImage(hospital.hasER ? Assets.emergency : Assets.hospital),
   ) {
     if(hospital.hasER) {
@@ -29,16 +29,16 @@ class HospitalMarker extends NMarker {
         context: context,
         builder: (dialogContext) {
           return Dialog(
-            insetPadding: EdgeInsets.all(35),
+            insetPadding: const EdgeInsets.all(35),
             child: Padding(
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     hospital.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                     ),
                   ),
@@ -46,7 +46,7 @@ class HospitalMarker extends NMarker {
                     height: 3,
                     color: hospital.hasER ? Colors.redAccent : Colors.lightGreen,
                   ),
-                  Text(
+                  const Text(
                     "시간표",
                     style: TextStyle(
                       fontSize: 20,
@@ -55,7 +55,7 @@ class HospitalMarker extends NMarker {
                   Center(
                     child: Table(
                       border: TableBorder.all(),
-                      columnWidths: {
+                      columnWidths: const {
                         0: FixedColumnWidth(60),
                         1: FixedColumnWidth(120)
                       },
@@ -120,7 +120,7 @@ class HospitalMarker extends NMarker {
   Text text(String text) => Text(
     text == "X" ? "휴진" : text,
     textAlign: TextAlign.center,
-    style: TextStyle(
+    style: const TextStyle(
         fontSize: 18
     ),
   );

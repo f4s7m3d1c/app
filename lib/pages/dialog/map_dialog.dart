@@ -28,7 +28,8 @@ class _MapDialogState extends State<MapDialog> {
     final List hospitals = data["hospitals"];
     int id = 0;
     final List<HospitalMarker> markers = [];
-    hospitals.forEach((hospital) {
+    for (var hospital in hospitals) {
+      if(!mounted) return;
       markers.add(HospitalMarker(
         context: context,
         id: "hospitals_$id",
@@ -49,7 +50,7 @@ class _MapDialogState extends State<MapDialog> {
         ),
       ));
       id++;
-    });
+    }
     controller.addOverlayAll(markers.toSet());
   }
 
@@ -68,11 +69,11 @@ class _MapDialogState extends State<MapDialog> {
         animation: NCameraAnimation.none,
         duration: Duration.zero,
       ));
-      final markerId = "user_location";
+      const markerId = "user_location";
       final marker = NMarker(
         id: markerId,
         position: latLng,
-        size: Size(100, 100),
+        size: const Size(100, 100),
         icon: const NOverlayImage.fromAssetImage(Assets.location),
       )..setGlobalZIndex(500000);
       controller.addOverlayAll({
@@ -100,7 +101,7 @@ class _MapDialogState extends State<MapDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: EdgeInsets.all(20),
+      insetPadding: const EdgeInsets.all(20),
       child: Container(
         padding: const EdgeInsets.all(5),
         child: Stack(
