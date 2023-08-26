@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:fastmedic/elements/hospital_marker.dart';
+import 'package:fastmedic/models/hospital.dart';
 import 'package:fastmedic/utils/assets.dart';
 import 'package:fastmedic/utils/toast.dart';
 import 'package:flutter/material.dart';
@@ -25,46 +27,30 @@ class _MapDialogState extends State<MapDialog> {
     Map<String, dynamic> data = json.decode(utf8.decode(response.bodyBytes));
     final List hospitals = data["hospitals"];
     int id = 0;
+    final List<HospitalMarker> markers = [];
     hospitals.forEach((hospital) {
-      final marker = NMarker(
+      markers.add(HospitalMarker(
+        context: context,
         id: "hospitals_$id",
         position: NLatLng(
           hospital["latitude"],
           hospital["longitude"],
         ),
-      )..setOnTapListener((overlay) {
-        overlay.setAlpha(0.7);
-        showDialog(
-          context: context,
-          builder: (dialogContext) {
-            return Dialog(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    hospital["name"],
-                    style: TextStyle(
-                      fontSize: 30,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        child: const Text("닫기"),
-                        onPressed: () => Navigator.pop(dialogContext),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            );
-          },
-        );
-      });
-      controller.addOverlay(marker);
+        hospital: Hospital(
+          name: hospital["name"],
+          hasER: hospital["hasER"],
+          timeMon: hospital["openTime"]["mon"],
+          timeTue: hospital["openTime"]["tue"],
+          timeWen: hospital["openTime"]["wen"],
+          timeThu: hospital["openTime"]["thu"],
+          timeFri: hospital["openTime"]["fri"],
+          timeSat: hospital["openTime"]["sat"],
+          timeSun: hospital["openTime"]["sun"],
+        ),
+      ));
       id++;
     });
+    controller.addOverlayAll(markers.toSet());
   }
 
   Future<void> updateToCurrent(NaverMapController controller ) async {
@@ -86,8 +72,9 @@ class _MapDialogState extends State<MapDialog> {
       final marker = NMarker(
         id: markerId,
         position: latLng,
+        size: Size(100, 100),
         icon: const NOverlayImage.fromAssetImage(Assets.location),
-      );
+      )..setGlobalZIndex(500000);
       controller.addOverlayAll({
         NCircleOverlay(
             id: "user_location_near",
@@ -103,6 +90,7 @@ class _MapDialogState extends State<MapDialog> {
         id: markerId,
         text: "현위치",
         alpha: 0.8,
+        offsetY: -25
       ));
     }catch(e){
       //NOPE
@@ -112,6 +100,7 @@ class _MapDialogState extends State<MapDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      insetPadding: EdgeInsets.all(20),
       child: Container(
         padding: const EdgeInsets.all(5),
         child: Stack(
