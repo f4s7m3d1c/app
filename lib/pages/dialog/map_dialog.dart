@@ -22,8 +22,8 @@ class _MapDialogState extends State<MapDialog> {
       sendToast("error code is ${response.statusCode}");
       return;
     }
-    Map<String, dynamic> data = json.decode(response.body);
-    final List<dynamic> hospitals = data["hospitals"];
+    Map<String, dynamic> data = json.decode(utf8.decode(response.bodyBytes));
+    final List hospitals = data["hospitals"];
     int id = 0;
     hospitals.forEach((hospital) {
       final marker = NMarker(
@@ -32,16 +32,21 @@ class _MapDialogState extends State<MapDialog> {
           hospital["latitude"],
           hospital["longitude"],
         ),
-      );
-      controller.addOverlay(marker);
-      marker.setOnTapListener((_) {
+      )..setOnTapListener((overlay) {
+        overlay.setAlpha(0.7);
         showDialog(
           context: context,
           builder: (dialogContext) {
             return Dialog(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  // TODO: 병원 정보
+                  Text(
+                    hospital["name"],
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -57,6 +62,8 @@ class _MapDialogState extends State<MapDialog> {
           },
         );
       });
+      controller.addOverlay(marker);
+      id++;
     });
   }
 
@@ -79,7 +86,7 @@ class _MapDialogState extends State<MapDialog> {
       final marker = NMarker(
         id: markerId,
         position: latLng,
-        icon: const NOverlayImage.fromAssetImage(Assets.Location),
+        icon: const NOverlayImage.fromAssetImage(Assets.location),
       );
       controller.addOverlayAll({
         NCircleOverlay(
