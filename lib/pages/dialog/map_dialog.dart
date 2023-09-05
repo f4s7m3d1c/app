@@ -1,7 +1,13 @@
+import 'dart:convert';
+
+import 'package:fastmedic/elements/hospital_marker.dart';
+import 'package:fastmedic/models/hospital.dart';
 import 'package:fastmedic/utils/assets.dart';
+import 'package:fastmedic/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart';
 
 class MapDialog extends StatefulWidget{
   const MapDialog({super.key});
@@ -12,11 +18,48 @@ class MapDialog extends StatefulWidget{
 
 class _MapDialogState extends State<MapDialog> {
 
+  Future<void> getHospitals(NaverMapController controller, Position position) async {
+    final Response response = await get(Uri.parse("https://nearbyhospitals.foundcake.kr/api/hospital?lat=${position.latitude}&lon=${position.longitude}"));
+    if(response.statusCode != 200) {
+      sendToast("error code is ${response.statusCode}");
+      return;
+    }
+    Map<String, dynamic> data = json.decode(utf8.decode(response.bodyBytes));
+    final List hospitals = data["hospitals"];
+    int id = 0;
+    final List<HospitalMarker> markers = [];
+    for (var hospital in hospitals) {
+      if(!mounted) return;
+      markers.add(HospitalMarker(
+        context: context,
+        id: "hospitals_$id",
+        position: NLatLng(
+          hospital["latitude"],
+          hospital["longitude"],
+        ),
+        hospital: Hospital(
+          name: hospital["name"],
+          hasER: hospital["hasER"],
+          timeMon: hospital["openTime"]["mon"],
+          timeTue: hospital["openTime"]["tue"],
+          timeWen: hospital["openTime"]["wen"],
+          timeThu: hospital["openTime"]["thu"],
+          timeFri: hospital["openTime"]["fri"],
+          timeSat: hospital["openTime"]["sat"],
+          timeSun: hospital["openTime"]["sun"],
+        ),
+      ));
+      id++;
+    }
+    controller.addOverlayAll(markers.toSet());
+  }
+
   Future<void> updateToCurrent(NaverMapController controller ) async {
     try{
       final Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high
       );
+      getHospitals(controller, position);
       final latLng =  NLatLng(position.latitude, position.longitude);
       controller.updateCamera(NCameraUpdate.fromCameraPosition(
           NCameraPosition(
@@ -26,11 +69,13 @@ class _MapDialogState extends State<MapDialog> {
         animation: NCameraAnimation.none,
         duration: Duration.zero,
       ));
+      const markerId = "user_location";
       final marker = NMarker(
-        id: "user_location",
+        id: markerId,
         position: latLng,
-        icon: const NOverlayImage.fromAssetImage(Assets.Location),
-      );
+        size: const Size(100, 100),
+        icon: const NOverlayImage.fromAssetImage(Assets.location),
+      )..setGlobalZIndex(500000);
       controller.addOverlayAll({
         NCircleOverlay(
             id: "user_location_near",
@@ -42,13 +87,12 @@ class _MapDialogState extends State<MapDialog> {
         ),
         marker,
       });
-      final markerInfo = NInfoWindow.onMarker(
-          id: marker.info.id,
-          text: "현위치",
-          offsetY: -20,
-          alpha: 0.9
-      );
-      marker.setOnTapListener((overlay) => marker.openInfoWindow(markerInfo));
+      marker.openInfoWindow(NInfoWindow.onMarker(
+        id: markerId,
+        text: "현위치",
+        alpha: 0.8,
+        offsetY: -25
+      ));
     }catch(e){
       //NOPE
     }
@@ -57,6 +101,7 @@ class _MapDialogState extends State<MapDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      insetPadding: const EdgeInsets.all(20),
       child: Container(
         padding: const EdgeInsets.all(5),
         child: Stack(
