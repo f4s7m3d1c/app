@@ -13,8 +13,8 @@ class Symptoms extends StatelessWidget{
       children: [
         Container(
           clipBehavior: Clip.hardEdge,
-          width: 150,
-          height: 150,
+          width: 160,
+          height: 160,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -29,16 +29,20 @@ class Symptoms extends StatelessWidget{
           child:
           Padding(
             padding: const EdgeInsets.all(15),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(ConditionName,
-                  style:
-                  const TextStyle(color: Colors.black,
-                      fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(
-                  width: 20,
+                Row(
+                  children: [
+                    Text(ConditionName,
+                      style:
+                      const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                      fontSize: 25),
+                    ),
+                  ],
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
