@@ -122,14 +122,65 @@ class SelectSickPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                child: Column(
-                  children: [
-                    //TODO: 입력칸
-                  ],
-                ),
-              )
             ],
+          ),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.grey.shade300
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(15),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child:
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 160,
+                        ),
+                        Text('입력',
+                          style: TextStyle(
+                            color: Colors.grey.shade300,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child:
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 160,
+                        ),
+                        Text('선택',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
