@@ -1,4 +1,5 @@
 import 'package:fastmedic/pages/basic_app_bar.dart';
+import 'package:fastmedic/pages/log_page.dart';
 import 'package:fastmedic/pages/response_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fastmedic/elements/SymptomsContainer.dart';
@@ -30,19 +31,25 @@ class SelectSickPage extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                const Row(
+                Row(
                   children: [
                     Text('Fast Medic',
                       style: TextStyle(color: Colors.black,
                           fontWeight: FontWeight.w400),
                     ),
                     SizedBox(
-                      width: 170,
+                      width: 150,
                     ),
-                    Icon(Icons.file_copy_outlined,
-                    color: Colors.black,
-                      size: 27,
-                    ),
+                    IconButton(
+                        icon : Icon(Icons.file_copy_outlined),
+                        color: Colors.black,
+                        onPressed: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => LogPage()),
+                          );
+                        }
+                    )
                   ],
                 ),
               ],
@@ -138,18 +145,26 @@ class SelectSickPage extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(1),
+                          blurRadius: 5.0,
+                          offset: const Offset(0,5),
+                        ),
+                      ],
                     ),
+                    width: 310,
                     child:
                     Row(
                       children: [
                         SizedBox(
-                          width: 160,
+                          width: 120,
                         ),
                         Text('입력',
                           style: TextStyle(
                             color: Colors.grey.shade300,
-                            fontSize: 30,
+                            fontSize: 40,
                           ),
                         ),
                       ],
@@ -158,25 +173,40 @@ class SelectSickPage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child:
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 160,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ResponsePage()));
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(30),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(1),
+                              blurRadius: 5.0,
+                              offset: const Offset(0,5),
+                            ),
+                          ],
                         ),
-                        Text('선택',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                          ),
+                        width: 310,
+                        child:
+                        Row(
+                          
+                          children: [
+                            SizedBox(
+                              width: 120,
+                            ),
+                            Text('선택',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
                   ),
                 ],
               ),
@@ -187,3 +217,4 @@ class SelectSickPage extends StatelessWidget {
     );
   }
 }
+
