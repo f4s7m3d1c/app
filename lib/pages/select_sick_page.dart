@@ -1,4 +1,3 @@
-import 'package:fastmedic/pages/basic_app_bar.dart';
 import 'package:fastmedic/pages/log_page.dart';
 import 'package:fastmedic/pages/response_page.dart';
 import 'package:flutter/material.dart';
@@ -33,20 +32,20 @@ class SelectSickPage extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Text('Fast Medic',
+                    const Text('Fast Medic',
                       style: TextStyle(color: Colors.black,
                           fontWeight: FontWeight.w400),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 150,
                     ),
                     IconButton(
-                        icon : Icon(Icons.file_copy_outlined),
+                        icon : const Icon(Icons.file_copy_outlined),
                         color: Colors.black,
                         onPressed: (){
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => LogPage()),
+                              MaterialPageRoute(builder: (context) => const LogPage()),
                           );
                         }
                     )
@@ -56,7 +55,7 @@ class SelectSickPage extends StatelessWidget {
             ),
           ),
         ),
-        body: Padding(
+        body: const Padding(
           padding: EdgeInsets.all(30),
           child: Column(
             children: [
@@ -138,7 +137,7 @@ class SelectSickPage extends StatelessWidget {
                 color: Colors.grey.shade300
             ),
             child: Padding(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -158,7 +157,7 @@ class SelectSickPage extends StatelessWidget {
                     child:
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 120,
                         ),
                         Text('입력',
@@ -170,13 +169,13 @@ class SelectSickPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   GestureDetector(
                     onTap: (){
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ResponsePage()));
+                          MaterialPageRoute(builder: (context) => const ResponsePage()));
                     },
                     child: Container(
                         decoration: BoxDecoration(
@@ -192,7 +191,7 @@ class SelectSickPage extends StatelessWidget {
                         ),
                         width: 310,
                         child:
-                        Row(
+                        const Row(
                           
                           children: [
                             SizedBox(

@@ -1,5 +1,7 @@
 //TODO: enum으로 증상 정리
 
+import 'package:fastmedic/utils/assets.dart';
+
 enum Sick{
   cough, // 기침
   stomachache, // 복통
@@ -36,6 +38,16 @@ extension ParseToString on Sick{
         return "충혈";
       case Sick.fever:
         return "발열";
+    }
+  }
+
+  String toImagePath() {
+    switch(this) {
+      case Sick.headache:
+        return "${Assets.sick_images}Headache.jpg";
+      case Sick.cough:
+        return "~"
+            //TODO: for @Santpau
     }
   }
 

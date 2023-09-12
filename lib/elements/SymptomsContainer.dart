@@ -4,7 +4,7 @@ class Symptoms extends StatelessWidget{
 
   final String images;
   final String ConditionName;
-  Symptoms({required this.images, required this.ConditionName});
+  const Symptoms({required this.images, required this.ConditionName});
 
   @override
   Widget build(BuildContext context) {

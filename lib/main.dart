@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:fastmedic/database/log_database.dart';
 import 'package:fastmedic/env/env.dart';
-import 'package:fastmedic/pages/log_page.dart';
-import 'package:fastmedic/pages/response_page.dart';
 import 'package:fastmedic/pages/select_sick_page.dart';
 import 'package:fastmedic/providers/log_list.dart';
 import 'package:path/path.dart';
