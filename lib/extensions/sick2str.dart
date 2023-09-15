@@ -1,4 +1,4 @@
-import '../models/Sick.dart';
+import 'package:fastmedic/models/sick.dart';
 
 extension SickList2str on List<Sick> {
 
