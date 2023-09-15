@@ -78,9 +78,7 @@ class SelectSickPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 40,
-                      ),
+                      SizedBox(height: 15,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -90,9 +88,7 @@ class SelectSickPage extends StatelessWidget {
                           Symptoms(sick: Sick.congestion),
                         ],
                       ),
-                      SizedBox(
-                        height: 40,
-                      ),
+                      SizedBox(height: 15,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -104,9 +100,7 @@ class SelectSickPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 40,
-                      ),
+                      SizedBox(height: 15,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -118,9 +112,7 @@ class SelectSickPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 40,
-                      ),
+                      SizedBox(height: 15,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

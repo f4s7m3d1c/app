@@ -1,5 +1,7 @@
 import 'package:fastmedic/models/sick.dart';
+import 'package:fastmedic/providers/select_sick.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Symptoms extends StatelessWidget {
   final Sick sick;
@@ -8,26 +10,25 @@ class Symptoms extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          clipBehavior: Clip.hardEdge,
+    return InkWell(
+      onTap: () => context.read<SelectSick>().onClick(sick),
+      child: Card(
+        elevation: 10,
+        clipBehavior: Clip.hardEdge,
+        shadowColor: Colors.black54,
+        shape: context.watch<SelectSick>().state.selects.contains(sick)
+            ? RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+                side: BorderSide(color: Colors.redAccent.shade400, width: 3),
+              )
+            : RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+        child: SizedBox(
           width: 160,
           height: 160,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(1),
-                blurRadius: 5.0,
-                offset: const Offset(0, 5),
-              ),
-            ],
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
-          ),
           child: Padding(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -52,6 +53,7 @@ class Symptoms extends StatelessWidget {
                         sick.toImagePath(),
                         height: 70,
                         width: 70,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ],
@@ -60,7 +62,7 @@ class Symptoms extends StatelessWidget {
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }
