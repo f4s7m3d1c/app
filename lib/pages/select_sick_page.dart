@@ -1,7 +1,9 @@
+import 'package:fastmedic/elements/symptoms.dart';
+import 'package:fastmedic/models/sick.dart';
 import 'package:fastmedic/pages/log_page.dart';
 import 'package:fastmedic/pages/response_page.dart';
+import 'package:fastmedic/utils/assets.dart';
 import 'package:flutter/material.dart';
-import 'package:fastmedic/elements/SymptomsContainer.dart';
 
 class SelectSickPage extends StatelessWidget {
   const SelectSickPage({super.key});
@@ -11,12 +13,11 @@ class SelectSickPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20)
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           backgroundColor: Colors.white,
-          title:
-          Container( //검색창 UI
+          title: Container(
+            //검색창 UI
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(30),
@@ -24,31 +25,34 @@ class SelectSickPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset('assets/sick/fastmedic.jpg',
-                  width: 40, height: 40,
+                Image.asset(
+                  Assets.mini_icon,
+                  width: 40,
+                  height: 40,
                 ),
                 const SizedBox(
                   width: 10,
                 ),
                 Row(
                   children: [
-                    const Text('Fast Medic',
-                      style: TextStyle(color: Colors.black,
-                          fontWeight: FontWeight.w400),
+                    const Text(
+                      'Fast Medic',
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.w400),
                     ),
                     const SizedBox(
                       width: 150,
                     ),
                     IconButton(
-                        icon : const Icon(Icons.file_copy_outlined),
+                        icon: const Icon(Icons.file_copy_outlined),
                         color: Colors.black,
-                        onPressed: (){
+                        onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const LogPage()),
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LogPage()),
                           );
-                        }
-                    )
+                        })
                   ],
                 ),
               ],
@@ -67,12 +71,10 @@ class SelectSickPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Symptoms(
-                            ConditionName: '두통',
-                            images: 'assets/sick/Headache.jpg',
+                            sick: Sick.headache,
                           ),
                           Symptoms(
-                            ConditionName: '호흡',
-                            images: 'assets/sick/breath.jpg',
+                            sick: Sick.dyspnoea,
                           ),
                         ],
                       ),
@@ -83,12 +85,22 @@ class SelectSickPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Symptoms(
-                            ConditionName: '물집',
-                            images: 'assets/sick/blister.jpg',
+                            sick: Sick.blister,
+                          ),
+                          Symptoms(sick: Sick.congestion),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Symptoms(
+                            sick: Sick.burns,
                           ),
                           Symptoms(
-                            ConditionName: '충혈',
-                            images: 'assets/sick/congestion.jpg',
+                            sick: Sick.cough,
                           ),
                         ],
                       ),
@@ -99,12 +111,10 @@ class SelectSickPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Symptoms(
-                            ConditionName: '화상',
-                            images: 'assets/sick/Burns.jpg',
+                            sick: Sick.fever,
                           ),
                           Symptoms(
-                            ConditionName: '기침',
-                            images: 'assets/sick/cough.jpg',
+                            sick: Sick.nausea,
                           ),
                         ],
                       ),
@@ -115,12 +125,10 @@ class SelectSickPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Symptoms(
-                            ConditionName: '발열',
-                            images: 'assets/sick/fever.jpg',
+                            sick: Sick.stomachache,
                           ),
                           Symptoms(
-                            ConditionName: '메스꺼움',
-                            images: 'assets/sick/colic.jpg',
+                            sick: Sick.convulsion,
                           ),
                         ],
                       ),
@@ -133,9 +141,7 @@ class SelectSickPage extends StatelessWidget {
         ),
         bottomNavigationBar: BottomAppBar(
           child: Container(
-            decoration: BoxDecoration(
-                color: Colors.grey.shade300
-            ),
+            decoration: BoxDecoration(color: Colors.grey.shade300),
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Column(
@@ -149,18 +155,18 @@ class SelectSickPage extends StatelessWidget {
                         BoxShadow(
                           color: Colors.grey.withOpacity(1),
                           blurRadius: 5.0,
-                          offset: const Offset(0,5),
+                          offset: const Offset(0, 5),
                         ),
                       ],
                     ),
                     width: 310,
-                    child:
-                    Row(
+                    child: Row(
                       children: [
                         const SizedBox(
                           width: 120,
                         ),
-                        Text('입력',
+                        Text(
+                          '입력',
                           style: TextStyle(
                             color: Colors.grey.shade300,
                             fontSize: 40,
@@ -173,39 +179,40 @@ class SelectSickPage extends StatelessWidget {
                     height: 10,
                   ),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const ResponsePage()));
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ResponsePage()));
                     },
                     child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(30),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(1),
-                              blurRadius: 5.0,
-                              offset: const Offset(0,5),
-                            ),
-                          ],
-                        ),
-                        width: 310,
-                        child:
-                        const Row(
-                          
-                          children: [
-                            SizedBox(
-                              width: 120,
-                            ),
-                            Text('선택',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                              ),
-                            ),
-                          ],
-                        ),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(30),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(1),
+                            blurRadius: 5.0,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
                       ),
+                      width: 310,
+                      child: const Row(
+                        children: [
+                          SizedBox(
+                            width: 120,
+                          ),
+                          Text(
+                            '선택',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -216,4 +223,3 @@ class SelectSickPage extends StatelessWidget {
     );
   }
 }
-
