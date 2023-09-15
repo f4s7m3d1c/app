@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fastmedic/models/Sick.dart';
+import 'package:fastmedic/models/sick.dart';
 import 'package:flutter/material.dart';
 
 class SelectSickState extends Equatable{
@@ -38,14 +38,13 @@ class SelectSick with ChangeNotifier{
 
   SelectSickState get state => _state;
 
-  void addSelect(Sick sick) {
-    final List<Sick> newSelects = [..._state.selects, sick];
-    _state = _state.copyWith(selects: newSelects);
-    notifyListeners();
-  }
-
-  void removeSelect(Sick sick) {
-    final List<Sick> newSelects = _state.selects..remove(sick);
+  void onClick(Sick sick) {
+    final List<Sick> newSelects;
+    if(_state.selects.contains(sick)){
+      newSelects = _state.selects..remove(sick);
+    } else {
+      newSelects = [..._state.selects, sick];
+    }
     _state = _state.copyWith(selects: newSelects);
     notifyListeners();
   }
