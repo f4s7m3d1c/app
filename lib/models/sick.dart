@@ -5,7 +5,7 @@ import 'package:fastmedic/utils/assets.dart';
 enum Sick{
   cough, // 기침
   stomachache, // 복통
-  hives, // 두드러기
+  burns, // 두드러기
   dyspnea, // 호흡곤란
   headache, // 두통
   nausea, // 메스꺼움
@@ -21,8 +21,8 @@ extension ParseToString on Sick{
       case Sick.cough:
         return "기침";
       case Sick.stomachache:
-        return "두통";
-      case Sick.hives:
+        return "복통";
+      case Sick.burns:
         return "두드러기";
       case Sick.dyspnea:
         return "호흡곤란";
@@ -40,14 +40,28 @@ extension ParseToString on Sick{
         return "발열";
     }
   }
-
   String toImagePath() {
     switch(this) {
+      case Sick.cough:
+        return "${Assets.sick_images}cough.jpg";
+      case Sick.stomachache:
+        return "${Assets.sick_images}colic.jpg";
+      case Sick.burns:
+        return "${Assets.sick_images}Burns.jpg";
+      case Sick.dyspnea:
+        return "${Assets.sick_images}breath.jpg";
       case Sick.headache:
         return "${Assets.sick_images}Headache.jpg";
-      case Sick.cough:
-        return "~"
-            //TODO: for @Santpau
+      case Sick.nausea:
+        return "${Assets.sick_images}convulsion.jpg";
+      case Sick.convulsion:
+        return "${Assets.sick_images}convulsion.jpg";
+      case Sick.bulla:
+        return "${Assets.sick_images}blister.jpg";
+      case Sick.hyperemia:
+        return "${Assets.sick_images}congestion.jpg";
+      case Sick.fever:
+        return "${Assets.sick_images}fever.jpg";
     }
   }
 
