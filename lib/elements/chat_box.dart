@@ -69,8 +69,8 @@ class ChatBox extends StatelessWidget {
           child: Container(
             margin: isSender
                 ? stateTick
-                ? const EdgeInsets.fromLTRB(7, 7, 14, 7)
-                : const EdgeInsets.fromLTRB(7, 7, 17, 7)
+                    ? const EdgeInsets.fromLTRB(7, 7, 14, 7)
+                    : const EdgeInsets.fromLTRB(7, 7, 17, 7)
                 : const EdgeInsets.fromLTRB(17, 7, 7, 7),
             child: Stack(
               children: <Widget>[
@@ -86,13 +86,13 @@ class ChatBox extends StatelessWidget {
                 ),
                 stateIcon != null && stateTick
                     ? Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: stateIcon,
-                )
+                        bottom: 0,
+                        right: 0,
+                        child: stateIcon,
+                      )
                     : const SizedBox(
-                  width: 1,
-                ),
+                        width: 1,
+                      ),
               ],
             ),
           ),

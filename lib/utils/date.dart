@@ -2,8 +2,8 @@ import 'package:fastmedic/extensions/to_int.dart';
 
 String twoDigits(int n) => n >= 10 ? "$n" : "0$n";
 
-String dateFormat(DateTime date)
-  => "${date.year}.${twoDigits(date.month)}.${twoDigits(date.day)}.${twoDigits(date.hour)}.${twoDigits(date.minute)}";
+String dateFormat(DateTime date) =>
+    "${date.year}.${twoDigits(date.month)}.${twoDigits(date.day)}.${twoDigits(date.hour)}.${twoDigits(date.minute)}";
 
 String dot2kor(String date) {
   List<String> words = date.split(".");
@@ -12,14 +12,14 @@ String dot2kor(String date) {
   final int day = words[2].toInt;
   int hour = words[3].toInt;
   late final String hourParser;
-  if(hour != 24 && hour > 11){
+  if (hour != 24 && hour > 11) {
     hour -= 12;
-    if(hour == 0) {
+    if (hour == 0) {
       hour = 12;
     }
     hourParser = "오후 $hour";
   } else {
-    if(hour == 24){
+    if (hour == 24) {
       hour = 12;
     }
     hourParser = "오전 $hour";

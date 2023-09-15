@@ -1,5 +1,4 @@
-class Hospital{
-
+class Hospital {
   final String name;
   final bool hasER;
   final String timeMon;

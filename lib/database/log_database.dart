@@ -4,14 +4,13 @@ import 'package:fastmedic/models/log.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LogDB {
-
   static LogDB? _instance;
 
   static LogDB get instance => _instance!;
 
   final Database db;
 
-  LogDB({required this.db}){
+  LogDB({required this.db}) {
     _instance = this;
   }
 
@@ -47,7 +46,7 @@ class LogDB {
     return logs;
   }
 
-  Future<void> removeLog(String id) async{
+  Future<void> removeLog(String id) async {
     await db.delete(
       "sick_search_db",
       where: "id = ?",

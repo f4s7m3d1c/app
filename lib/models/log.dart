@@ -1,8 +1,7 @@
 import 'package:fastmedic/extensions/sick2str.dart';
 import 'package:fastmedic/models/sick.dart';
-import 'package:uuid/uuid.dart';
-
 import 'package:fastmedic/utils/date.dart';
+import 'package:uuid/uuid.dart';
 
 class Log {
   final String id;

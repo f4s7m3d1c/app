@@ -1,4 +1,4 @@
-class Assets{
+class Assets {
   static const location = "assets/map/location.png";
   static const hospital = "assets/map/hospital.png";
   static const emergency = "assets/map/emergency.png";

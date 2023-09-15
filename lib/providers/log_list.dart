@@ -4,14 +4,11 @@ import 'package:flutter/material.dart';
 
 import '../models/log.dart';
 
-class LogListState extends Equatable{
+class LogListState extends Equatable {
   final List<Log> logs;
   final bool isLoaded;
 
-  const LogListState({
-    required this.logs,
-    required this.isLoaded
-  });
+  const LogListState({required this.logs, required this.isLoaded});
 
   factory LogListState.initial() {
     return const LogListState(logs: [], isLoaded: false);
@@ -40,8 +37,10 @@ class LogList with ChangeNotifier {
   LogListState get state => _state;
 
   void setLogs(List<Log> logs) {
-    if(_state.isLoaded) return;
-    logs.sort((a, b) => a.date.compareTo(b.date),);
+    if (_state.isLoaded) return;
+    logs.sort(
+      (a, b) => a.date.compareTo(b.date),
+    );
     _state = _state.copyWith(
       logs: logs,
       isLoaded: true,
@@ -52,10 +51,7 @@ class LogList with ChangeNotifier {
   void addLog(Log log) {
     LogDB.instance.addLog(log);
     _state = _state.copyWith(
-      logs: [
-        log,
-        ..._state.logs
-      ],
+      logs: [log, ..._state.logs],
     );
     notifyListeners();
   }
