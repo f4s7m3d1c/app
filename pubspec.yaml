@@ -80,10 +80,10 @@ flutter:
     - assets/ai_icon.png
     - assets/sick/blister.jpg
     - assets/sick/breath.jpg
-    - assets/sick/Burns.jpg
+    -  assets/sick/burns.jpg
     - assets/sick/congestion.jpg
-    - assets/sick/fastmedic.jpg
-    - assets/sick/Headache.jpg
+    - assets/sick/convulsion.jpg
+    - assets/sick/headache.jpg
     - assets/sick/sickness.jpg
     - assets/sick/cough.jpg
     - assets/sick/fever.jpg
