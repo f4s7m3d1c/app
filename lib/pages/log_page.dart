@@ -94,8 +94,16 @@ class LogCard extends StatelessWidget{
   }
 }
 
-class LogPage extends StatelessWidget {
+class LogPage extends StatefulWidget {
   const LogPage({super.key});
+
+  @override
+  State<LogPage> createState() => _LogPageState();
+}
+
+class _LogPageState extends State<LogPage> {
+
+  bool isReverse = true;
 
   Future<void> loadLogs(LogList provider) async {
     List<Log> logs = await LogDB.instance.getLogs();
@@ -137,9 +145,33 @@ class LogPage extends StatelessWidget {
       );
     } else {
       List<Log> logs = context.watch<LogList>().state.logs;
-      content = ListView.builder(
-        itemCount: logs.length,
-        itemBuilder: (context, index) => LogCard(log: logs[index]),
+      if(isReverse){
+        logs = logs.reversed.toList();
+      }
+      content = Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                child: Text(
+                  isReverse ? "▲ 내림차순" : "▼ 오름차순",
+                  style: const TextStyle(fontSize: 16,),
+                ),
+                onPressed: () => setState(() {
+                  isReverse = !isReverse;
+                }),
+              )
+            ],
+          ),
+          const SizedBox(height: 5,),
+          Expanded(
+            child: ListView.builder(
+              itemCount: logs.length,
+              itemBuilder: (context, index) => LogCard(log: logs[index]),
+            ),
+          )
+        ],
       );
     }
 

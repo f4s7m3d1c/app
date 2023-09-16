@@ -38,9 +38,6 @@ class LogList with ChangeNotifier {
 
   void setLogs(List<Log> logs) {
     if (_state.isLoaded) return;
-    logs.sort(
-      (a, b) => a.date.compareTo(b.date),
-    );
     _state = _state.copyWith(
       logs: logs,
       isLoaded: true,
