@@ -121,6 +121,20 @@ class LogPage extends StatelessWidget {
           ],
         ),
       );
+    } else if(context.watch<LogList>().state.logs.isEmpty) {
+      content = const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "로그가 존재하지 않습니다.",
+              style: TextStyle(
+                fontSize: 25,
+              ),
+            ),
+          ],
+        ),
+      );
     } else {
       List<Log> logs = context.watch<LogList>().state.logs;
       content = ListView.builder(
@@ -132,7 +146,11 @@ class LogPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: BasicAppBar,
-        body: content,
+        body: Container(
+          constraints: const BoxConstraints(maxWidth: 500),
+          padding: const EdgeInsets.all(5),
+          child: content,
+        ),
       ),
     );
   }

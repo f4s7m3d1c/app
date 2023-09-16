@@ -83,97 +83,101 @@ class ResponsePage extends StatelessWidget{
     return SafeArea(
       child: Scaffold(
         appBar: BasicAppBar,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 10,),
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: Card(
-                  color: Colors.grey.shade200,
-                  margin: const EdgeInsets.all(1),
-                  child: FutureBuilder(
-                    future: _callChatGPT(context.read<SelectSick>().state.selects),
-                    builder: _buildFuture,
+        body: Container(
+          constraints: const BoxConstraints(maxWidth: 500),
+          padding: const EdgeInsets.all(5),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 10,),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Card(
+                    color: Colors.grey.shade200,
+                    margin: const EdgeInsets.all(1),
+                    child: FutureBuilder(
+                      future: _callChatGPT(context.read<SelectSick>().state.selects),
+                      builder: _buildFuture,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20,),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconTextButton(
-                    width: 120,
-                    color: Colors.lightBlue,
-                    icon: const Icon(
-                      Icons.map_sharp,
-                      size: 25,
-                      color: Colors.white,
-                    ),
-                    text: const Text(
-                      "주변 병원",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black87,
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20,),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconTextButton(
+                      width: 120,
+                      color: Colors.lightBlue,
+                      icon: const Icon(
+                        Icons.map_sharp,
+                        size: 25,
+                        color: Colors.white,
                       ),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => const MapDialog(),
-                      );
-                    },
-                  ),
-                  const SizedBox(width: 5,),
-                  IconTextButton(
-                    width: 75,
-                    color: Colors.redAccent,
-                    icon: const Icon(
-                      Icons.call,
-                      size: 25,
-                      color: Colors.white,
-                    ),
-                    text: const Text(
-                      "119",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text("전화 연결을 하시겠습니까?"),
-                          content: const Text("119에 전화가 연결됩니다."),
-                          actions: [
-                            TextButton(
-                              child: const Text("예"),
-                              onPressed: () {
-                                //TODO: 전화 연결
-                                Navigator.pop(context, true);
-                              },
-                            ),
-                            TextButton(
-                              child: const Text("아니요"),
-                              onPressed: () => Navigator.pop(context, false),
-                            ),
-                          ],
+                      text: const Text(
+                        "주변 병원",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black87,
                         ),
-                      );
-                    },
-                  ),
-                ],
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => const MapDialog(),
+                        );
+                      },
+                    ),
+                    const SizedBox(width: 5,),
+                    IconTextButton(
+                      width: 75,
+                      color: Colors.redAccent,
+                      icon: const Icon(
+                        Icons.call,
+                        size: 25,
+                        color: Colors.white,
+                      ),
+                      text: const Text(
+                        "119",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text("전화 연결을 하시겠습니까?"),
+                            content: const Text("119에 전화가 연결됩니다."),
+                            actions: [
+                              TextButton(
+                                child: const Text("예"),
+                                onPressed: () {
+                                  //TODO: 전화 연결
+                                  Navigator.pop(context, true);
+                                },
+                              ),
+                              TextButton(
+                                child: const Text("아니요"),
+                                onPressed: () => Navigator.pop(context, false),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            )
-          ],
+              const SizedBox(
+                height: 15,
+              )
+            ],
+          ),
         ),
       ),
     );

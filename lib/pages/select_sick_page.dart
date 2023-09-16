@@ -59,9 +59,10 @@ class SelectSickPage extends StatelessWidget {
             ),
           ),
         ),
-        body: const Padding(
-          padding: EdgeInsets.all(10),
-          child: Column(
+        body: Container(
+          constraints: const BoxConstraints(maxWidth: 500),
+          padding: const EdgeInsets.all(10),
+          child: const Column(
             children: [
               Expanded(
                 child: SingleChildScrollView(
