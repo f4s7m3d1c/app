@@ -60,7 +60,7 @@ class SelectSickPage extends StatelessWidget {
           ),
         ),
         body: const Padding(
-          padding: EdgeInsets.all(30),
+          padding: EdgeInsets.all(10),
           child: Column(
             children: [
               Expanded(
@@ -78,7 +78,7 @@ class SelectSickPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(height: 7,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -88,7 +88,7 @@ class SelectSickPage extends StatelessWidget {
                           Symptoms(sick: Sick.congestion),
                         ],
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(height: 7,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -100,7 +100,7 @@ class SelectSickPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(height: 7,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -112,7 +112,7 @@ class SelectSickPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(height: 7,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -10,6 +10,7 @@ class Symptoms extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () => context.read<SelectSick>().onClick(sick),
       child: Card(
@@ -25,8 +26,8 @@ class Symptoms extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25),
               ),
         child: SizedBox(
-          width: 160,
-          height: 160,
+          width: width * 0.45,
+          height: width * 0.45,
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -51,8 +52,8 @@ class Symptoms extends StatelessWidget {
                       scale: 3,
                       child: Image.asset(
                         sick.toImagePath(),
-                        height: 70,
-                        width: 70,
+                        height: width * 0.2,
+                        width: width * 0.2,
                         fit: BoxFit.contain,
                       ),
                     ),
