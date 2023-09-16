@@ -2,7 +2,7 @@ import 'package:fastmedic/elements/chat_box.dart';
 import 'package:fastmedic/elements/icon_text_button.dart';
 import 'package:fastmedic/models/log.dart';
 import 'package:fastmedic/models/sick.dart';
-import 'package:fastmedic/pages/basic_app_bar.dart';
+import 'package:fastmedic/pages/app_bar.dart';
 import 'package:fastmedic/pages/dialog/map_dialog.dart';
 import 'package:fastmedic/providers/log_list.dart';
 import 'package:fastmedic/providers/select_sick.dart';
@@ -82,7 +82,7 @@ class ResponsePage extends StatelessWidget{
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: BasicAppBar,
+        appBar: backIconAppBar(context),
         body: Container(
           constraints: const BoxConstraints(maxWidth: 500),
           padding: const EdgeInsets.all(5),

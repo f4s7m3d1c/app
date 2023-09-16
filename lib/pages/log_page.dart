@@ -1,6 +1,6 @@
 import 'package:fastmedic/database/log_database.dart';
 import 'package:fastmedic/models/log.dart';
-import 'package:fastmedic/pages/basic_app_bar.dart';
+import 'package:fastmedic/pages/app_bar.dart';
 import 'package:fastmedic/providers/log_list.dart';
 import 'package:fastmedic/utils/date.dart';
 import 'package:flutter/material.dart';
@@ -145,7 +145,7 @@ class LogPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: BasicAppBar,
+        appBar: backIconAppBar(context),
         body: Container(
           constraints: const BoxConstraints(maxWidth: 500),
           padding: const EdgeInsets.all(5),
